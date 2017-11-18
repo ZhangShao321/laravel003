@@ -1,0 +1,191 @@
+//1 user 用户表
+
+create table user(
+id int unsigned auto_increment primary key,
+phone char(12) not null unique,
+password char(33) not null,
+auth tinyint not null default 0,
+status tinyint not null default 1,
+lastlogin int not null default 19970101
+)engine=innodb;
+
+
+//2 用户详情表
+
+create table userDetail(
+id int unsigned auto_increment primary key,
+uid int  not null,
+nickName char(50),
+email char(50),
+qq char(15),
+sex enum('w','m') default 'm',
+photo char(255) default '1.jpg'
+)engine=innodb;
+
+
+//3 电影院/商户
+create table cinema(
+id int unsigned auto_increment primary key,
+aid int not null,
+cinema varchar(255) not null,
+phone varchar(255) not null,
+password varchar(20) not null,
+license varchar(255) not null,
+clogo varchar(255) not null,
+status tinyint not null default 1,
+time tinyint not null
+)engine=innodb;
+
+
+//电影院登录
+create table cinlogin(
+id int unsigned auto_increment primary key,
+cid int not null,
+cinema varchar(255) not null,
+password varchar(20) not null,
+status tinyint not null default 1,
+time tinyint not null
+)engine=innodb;
+
+//4 电影院信息表
+create table cininfo(
+id int unsigned auto_increment primary key,
+cid int not null,
+city varchar(255) not null,
+area varchar(255) not null,
+address varchar(20) not null
+)engine=innodb;
+
+
+//5 电影院的影厅
+create table roominfo(
+id int unsigned auto_increment primary key,
+cid int not null,
+sid int not null,
+roomname varchar(255) not null,
+roomtype varchar(255) not null,
+status tinyint not null default 1,
+rtime tinyint not null
+)engine=innodb;
+
+
+//6 电影院的类型
+create table filmtype(
+id int unsigned auto_increment primary key,
+tname varchar(255) not null,
+status tinyint not null default 1,
+fid tinyint not null
+)engine=innodb;
+
+
+//7 电影
+create table film(
+id int unsigned auto_increment primary key,
+cid int not null,
+tid int not null,
+filmname varchar(255) not null,
+filmtime int not null,
+keywords varchar(255) not null,
+director varchar(255) not null,
+protagonist varchar(255) not null,
+summary varchar(255) not null,
+showtime varchar(255) not null,
+filepic varchar(255) not null,
+price int not null,
+shownum int not null,
+status tinyint not null default 1
+)engine=innodb;
+
+
+//8 电影放映表
+create table showfilm(
+id int unsigned auto_increment primary key,
+cid int not null,
+rid int not null,
+fid int not null,
+time int not null,
+status tinyint not null default 1
+)engine=innodb;
+
+
+//9 订票表
+create table ticket(
+id int unsigned auto_increment primary key,
+uid int not null,
+cid int not null,
+rid int not null,
+fid int not null,
+seat varchar(255) not null,
+price int not null,
+time int not null,
+status tinyint not null default 0
+)engine=innodb;
+
+
+//10 钱包
+create table money(
+id int unsigned auto_increment primary key,
+mid int not null,
+money int not null
+)engine=innodb;
+
+
+//11 轮播图
+create table lunbo(
+id int unsigned auto_increment primary key,
+picname varchar(255) not null,
+fname varchar(255) not null,
+status tinyint not null default 0,
+time int not null
+)engine=innodb;
+
+
+
+//12 分区/ 板块
+create table type(
+id int unsigned auto_increment primary key,
+name char(20),
+status tinyint not null default 1,
+pid int not null default 0,
+path varchar(255) not null default 0,
+blogo varchar(255) not null default '1.jpg'
+)engine=innodb;
+
+
+
+//13 座位
+create table seat(
+id int unsigned auto_increment primary key,
+cid int not null,
+rid int not null,
+hang int not null,
+lie int not null,
+seat text not null,
+status tinyint not null default 0
+)engine=innodb;
+
+//14 友情链接表
+
+create table friendlink(
+id int unsigned auto_increment primary key,
+linkname varchar(255) not null unique,
+url varchar(255),
+logo varchar(255) not null,
+content text , 
+ordernum tinyint not null
+)engine=innodb;
+
+
+
+//15 网站配置表
+
+create table config(
+id int unsigned auto_increment primary key,
+webname varchar(255) not null,
+keywords varchar(255) not null,
+logo varchar(255) not null,
+copy varchar(255) not null,
+status tinyint not null default 1
+)engine=innodb;
+
+
